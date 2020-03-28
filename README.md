@@ -92,32 +92,32 @@ val extraLesson = Lesson("Additional lesson")<br>
         }
 3. Добавлен компонент addLesson. Он является функциональным, в качестве свойств передан click, чтобы можно было его вызвать при клике, и extraLesson, т.е. дополнительный урок, который необходимо вывести. <br>
 Код для addLesson:<br>
+    
+        interface addLessonProps : RProps{
+        var click: (Event)->Unit
+        var extraLesson: Lesson
+        }
 
-    interface addLessonProps : RProps{
-    var click: (Event)->Unit
-    var extraLesson: Lesson
-}
+        val faddLesson =
+            functionalComponent<addLessonProps>{
+                h2{+ "Add Lesson"}
+                ul{
+                    +"${it.extraLesson.name}"
+                    attrs.onClickFunction = it.click
+                }
+            }
 
-    val faddLesson = 
-        functionalComponent<addLessonProps>{ 
-            h2{+ "Add Lesson"} 
-            ul{ 
-                +"${it.extraLesson.name}" 
-                attrs.onClickFunction = it.click 
-            } 
-        } 
-
-    fun RBuilder.addLesson( 
-        click:(Event)->Unit, 
-        extraLesson: Lesson 
-    ) = child(faddLesson){ 
-        attrs.click = click 
-        attrs.extraLesson = extraLesson 
-    } 
+        fun RBuilder.addLesson(
+            click:(Event)->Unit,
+            extraLesson: Lesson
+         ) = child(faddLesson){
+            attrs.click = click
+            attrs.extraLesson = extraLesson
+        }
 
 Программа после запуска:<br>![](/screen6/запуск.png)<br>
 Добавление урока:<br>![](/screen6/добавление.png)<br>
 Проверка корректной работы(отметили нескольких студентов присутствующими):![](/screen6/корректность.png)<br>
-Состояние компонентов после данных действий:<br> ![](/screen6/состояние.png)<br>
+Состояние после данных действий:<br> ![](/screen6/состояние.png)<br>
 
  
